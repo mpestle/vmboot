@@ -1,0 +1,34 @@
+#export ANSIBLE_INVENTORY_UNPARSED_WARNING=false
+#export ANSIBLE_LOCALHOST_WARNING=false
+---
+- hosts: 127.0.0.1
+  connection: local
+  vars:
+    INVENTORY_UNPARSED_WARNING: False
+
+  tasks:
+
+# Fix the DNS problem for the rocky 9.3 image
+# See script for documentation.
+# Everything will run veeeeeeeeeeeery slowly if you don't do this first,
+# since every DNS lookup takes many seconds to timeout before getting
+# resolved by the correct entry.
+# First, copy it over...
+  - name: fix_dns script cp
+    become: true
+    copy:
+      src: scripts/fix_dns
+      dest: /usr/local/bin/fix_dns
+      mode: u+rwx,g-wx,o-wx
+
+# then run it...
+  - name: fix_dns
+    become: true
+    command: /usr/local/bin/fix_dns
+    register: rslt
+    changed_when: "rslt.stdout == 'changed'"
+
+  - name: bashrc
+    copy:
+      src: files/bash_aliases
+      dest: ~/.bashrc.d/test_stuff

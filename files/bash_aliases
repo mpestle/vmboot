@@ -1,0 +1,22 @@
+# User specific aliases and functions - Matt Pestle
+alias mv="mv -i"
+alias cp="cp -i"
+alias rm="rm -i"
+alias m=more
+alias moire=more
+alias j=jobs
+alias d="ls -la"
+alias lsl="ls -la"
+alias dir=ls
+alias f=finger
+alias grep="grep -i"
+alias psg="ps -ef | grep"
+alias tt='ls -ltr | tail'
+export TZ=Pacific/Auckland
+#PS1='[`uname -n`]$PWD>'
+P=$(uname -n)
+P=${P%%.*}
+PS1='[rebase-$P]$PWD>'
+PATH=$PATH:$HOME/.local/bin
+umask 022
+export EDITOR=vi
