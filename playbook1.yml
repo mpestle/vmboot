@@ -28,7 +28,7 @@
 
   - name: create bashrc.d directory
     ansible.builtin.file:
-      path: .bashrc.d
+      path: ~/.bashrc.d
       state: directory
 
   - name: bashrc
