@@ -13,3 +13,14 @@
     copy:
       src: files/bash_aliases
       dest: ~/.bashrc.d/test_stuff
+
+  - name: install required software
+    become: true
+    ansible.builtin.package:
+      name:
+        - "{{ item }}"
+      state: present
+    loop:
+      - telnet
+      - jq
+
