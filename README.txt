@@ -19,3 +19,6 @@ resource "openstack_compute_instance_v2" "whatever" {
 The image you are using must have git and ansible installed.
 
 vminit.sh clones the repo, cds into the setup_dir, and runs the playbook.
+
+FWIW: While possibly handy in some cases, I'm not entirely convinced
+      this is the best way to accomplish what we're trying to do here.
